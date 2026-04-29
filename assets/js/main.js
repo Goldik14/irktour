@@ -7,8 +7,7 @@ if (nav) {
     home: 'index.html',
     merchants: 'merchants.html',
     routes: 'routes.html',
-    timeline: 'timeline.html',
-    sources: 'sources.html'
+    timeline: 'timeline.html'
   }[page];
 
   [...nav.querySelectorAll('a')].forEach((link) => {
@@ -51,3 +50,51 @@ if ('IntersectionObserver' in window && revealItems.length) {
 } else {
   revealItems.forEach((item) => item.classList.add('is-visible'));
 }
+
+const zoomableImages = document.querySelectorAll('.media-block img, .merchant-photo img');
+
+if (zoomableImages.length) {
+  const lightbox = document.createElement('div');
+  const lightboxImage = document.createElement('img');
+
+  lightbox.className = 'image-lightbox';
+  lightbox.setAttribute('aria-hidden', 'true');
+  lightbox.appendChild(lightboxImage);
+  document.body.appendChild(lightbox);
+
+  const closeLightbox = () => {
+    lightbox.classList.remove('is-open');
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+  };
+
+  zoomableImages.forEach((image) => {
+    image.addEventListener('click', () => {
+      const source = image.currentSrc || image.src;
+
+      if (lightbox.classList.contains('is-open') && lightboxImage.src === source) {
+        closeLightbox();
+        return;
+      }
+
+      lightboxImage.src = source;
+      lightboxImage.alt = image.alt || '';
+      lightbox.classList.add('is-open');
+      lightbox.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  lightbox.addEventListener('click', (event) => {
+    if (event.target === lightbox || event.target === lightboxImage) {
+      closeLightbox();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape' && lightbox.classList.contains('is-open')) {
+      closeLightbox();
+    }
+  });
+}
+
