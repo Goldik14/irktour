@@ -339,6 +339,9 @@ img { max-width: 100%; display: block; }
   border-radius: 18px;
   box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
 }
+[hidden] {
+  display: none !important;
+}
 .analytics-banner p {
   margin: 0;
   font-size: 0.95rem;

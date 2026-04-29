@@ -103,15 +103,28 @@ const analyticsAccept = document.getElementById('analytics-accept');
 const analyticsConsentKey = 'analytics-consent-accepted';
 
 if (analyticsBanner && analyticsAccept) {
-  const accepted = localStorage.getItem(analyticsConsentKey) === 'true';
+  let accepted = false;
+
+  try {
+    accepted = localStorage.getItem(analyticsConsentKey) === 'true';
+  } catch (error) {
+    accepted = false;
+  }
 
   if (!accepted) {
     analyticsBanner.hidden = false;
+    analyticsBanner.style.display = 'flex';
   }
 
   analyticsAccept.addEventListener('click', () => {
-    localStorage.setItem(analyticsConsentKey, 'true');
+    try {
+      localStorage.setItem(analyticsConsentKey, 'true');
+    } catch (error) {
+      // Ignore storage issues and still hide the banner for the current session.
+    }
+
     analyticsBanner.hidden = true;
+    analyticsBanner.style.display = 'none';
   });
 }
 
