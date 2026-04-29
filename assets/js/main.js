@@ -98,3 +98,20 @@ if (zoomableImages.length) {
   });
 }
 
+const analyticsBanner = document.getElementById('analytics-banner');
+const analyticsAccept = document.getElementById('analytics-accept');
+const analyticsConsentKey = 'analytics-consent-accepted';
+
+if (analyticsBanner && analyticsAccept) {
+  const accepted = localStorage.getItem(analyticsConsentKey) === 'true';
+
+  if (!accepted) {
+    analyticsBanner.hidden = false;
+  }
+
+  analyticsAccept.addEventListener('click', () => {
+    localStorage.setItem(analyticsConsentKey, 'true');
+    analyticsBanner.hidden = true;
+  });
+}
+

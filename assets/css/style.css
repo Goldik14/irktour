@@ -324,6 +324,37 @@ img { max-width: 100%; display: block; }
   border-top: 1px solid var(--line);
 }
 .footer-inner { display: flex; justify-content: center; color: var(--muted); }
+.analytics-banner {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  z-index: 130;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  max-width: 420px;
+  padding: 16px 18px;
+  background: rgba(19, 32, 51, 0.96);
+  color: #f8fbff;
+  border-radius: 18px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.18);
+}
+.analytics-banner p {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.analytics-button {
+  flex-shrink: 0;
+  padding: 10px 14px;
+  border: 0;
+  border-radius: 999px;
+  background: #ffffff;
+  color: var(--text);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
 .reveal {
   opacity: 0;
   transform: translateY(24px);
@@ -403,6 +434,14 @@ img { max-width: 100%; display: block; }
   .tabs-large { padding: 22px; }
   .merchant-photo img { min-height: 280px; }
   .person-name { font-size: 1.7rem; }
+  .analytics-banner {
+    left: 16px;
+    right: 16px;
+    bottom: 16px;
+    max-width: none;
+    flex-direction: column;
+    align-items: stretch;
+  }
   .image-lightbox {
     padding: 16px;
   }
